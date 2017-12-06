@@ -8,12 +8,12 @@
 #define DHTPIN D0
 DHT dht(DHTPIN, DHTTYPE);
 //intialize light
-#define lightpin D3
+#define lightpin A0
 
 //declare variables
 float hum;
 float temp;
-float light;
+int light;
 
 //set lcd address
 LiquidCrystal_I2C lcd(0x3F,16,2);
@@ -47,9 +47,9 @@ void loop()
   //print to serial
   Serial.println("humidity: ");
   Serial.println(hum);
-  Serial.println(" %, temp: ");
+  Serial.println("temp: ");
   Serial.println(temp);
-  Serial.println(" %, light: ");
+  Serial.println("light: ");
   Serial.println(light);
   delay(1000);
   
