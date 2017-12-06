@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<script src="asyncReq.js"> </script>
+<script>
+	
+	var oldObj = {}
+	
+	
+  var x = function(){
+    loadFile("./getData", function(data){
+      var obj = JSON.parse(data);
+	  var markup = "";
+	  
+	  var diff = oldObj.light - obj.light;
+	  var color = "black";
+	  if(diff > 0) color = "red";
+	  else if(diff < 0) color = "green";
+	  
+	  markup += 
+	  "<p style='color:" + color + "'><b>Light:</b> " + obj.light + "(" + diff + ")</p>";
+	  
+	  markup +=
+	  "<br> <p style='color:" + color + "'><b>Temperature:</b> " + obj.temp + "(" + diff + ")</p>";
+
+	  markup+=
+        "<br> <p style='color:" + color + "'><b>Humidity:</b> " + obj.humidity + "(" + diff + ")</p>";
+		
+		document.getElementById("results").innerHTML = markup;
+		
+		oldObj = obj;
+    });
+  }
+function start()
+{
+  x();
+  setInterval("x()", 1000);
+}
+</script>
+
+<style>
+	body{
+		text-align:center;
+	}
+</style>
+
+</head>
+
+<body onload='start()'>
+<h1> Sensor Data </h1>
+<br><hr>
+
+
+
+<div id='results'> </div>
+
+</body>
+</html>
