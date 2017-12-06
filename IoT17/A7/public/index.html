@@ -72,15 +72,29 @@ function updateGraph()
 	/* edit this function to make the graph update live */
 	buildGraph();
 	
-	chart.flow({
+	var graphdata = {
 		x: 'x';
 	 columns: [
 	    ['Light', x],
 	    ['Humidity', x],
 	    ['Temperature', x]
 	 ],
-	 duration: 1500
-	});
+	 duration: 1500	
+	};
+	
+	var graphchart = c3.generate({bindto: '#graphchart, data: graphdata'});
+	
+	setInterval(function () {
+		graphchart.flow({
+			columns: [
+				['light','humidity', 'temperature']
+			]
+		});
+	}, 1500);
+
+);
+	
+
 	
 	
 	
